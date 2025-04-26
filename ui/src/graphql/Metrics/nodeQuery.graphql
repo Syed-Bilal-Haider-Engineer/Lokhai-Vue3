@@ -1,0 +1,15 @@
+fragment NodeLatencyParts on Query {
+  nodeLatency: metric(
+    name: "response_time_msec", 
+    labels: {
+      node_id: $id
+      monitor: $monitor
+      instance: $instance
+    }
+    timeRange: $timeRange
+    timeRangeUnit: $timeRangeUnit
+  ) {
+    status
+    ...MetricParts
+  }
+}

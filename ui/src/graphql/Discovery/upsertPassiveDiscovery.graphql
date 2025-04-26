@@ -1,0 +1,14 @@
+mutation UpsertPassiveDiscovery($passiveDiscovery: PassiveDiscoveryUpsertInput!) {
+  upsertPassiveDiscovery(discovery: $passiveDiscovery) {
+    id
+    locationId
+    name
+    snmpCommunities
+    snmpPorts
+    toggle
+  }
+}
+
+mutation DeletePassiveDiscovery($id: Long!) {
+  deletePassiveDiscovery(id: $id)
+}

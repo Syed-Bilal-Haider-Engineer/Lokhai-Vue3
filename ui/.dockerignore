@@ -1,0 +1,11 @@
+.git
+node_modules
+**/*.swp
+**/*.tsx~
+**/*.swn
+**/*.swo
+mock-graphql
+node_modules
+.env.local
+.env.*.local
+coverage

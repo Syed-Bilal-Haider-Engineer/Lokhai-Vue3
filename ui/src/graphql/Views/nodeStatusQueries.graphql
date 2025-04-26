@@ -1,0 +1,78 @@
+fragment EventsByNodeIdParts on Query {
+  events: findEventsByNodeId(id: $id) {
+    id
+    uei
+    nodeId
+    ipAddress
+    producedTime
+  }
+}
+
+fragment NodeByIdParts on Query {
+  node: findNodeById(id: $id) {
+    id
+    nodeLabel
+    nodeAlias
+    objectId
+    systemContact
+    systemDescr
+    systemLocation
+    systemName
+    scanType
+    location {
+      location
+    }
+    ipInterfaces {
+      id
+      hostname
+      ipAddress
+      netmask
+      nodeId
+      snmpPrimary
+      azureInterfaceId
+    }
+    snmpInterfaces {
+      id
+      ifAdminStatus
+      ifAlias
+      ifDescr
+      ifIndex
+      ifName
+      ifOperatorStatus
+      ifSpeed
+      ifType
+      ipAddress
+      nodeId
+      physicalAddr
+    }
+    azureInterfaces {
+      id
+      nodeId
+      interfaceName
+      privateIpId
+      publicIpAddress
+      publicIpId
+      location
+    }
+  }
+}
+
+# TODO: Add metric details when endpoints available
+query ListNodeStatus($id: Long) {
+  ...EventsByNodeIdParts
+  ...NodeByIdParts
+}
+
+
+query findExportersForNodeStatus($requestCriteria: RequestCriteriaInput!) {
+  findExporters(requestCriteria: $requestCriteria) {
+    snmpInterface {
+      ifIndex
+      ifName
+    }
+    ipInterface {
+      id
+      ipAddress
+    }
+  }
+}

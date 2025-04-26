@@ -1,0 +1,27 @@
+mutation AddNode($node: NodeCreateInput!) {
+  addNode(node: $node) {
+    createTime
+    id
+    monitoringLocationId
+    nodeLabel
+  }
+}
+
+mutation DeleteNode ($id: Long!) {
+  deleteNode (id: $id)
+}
+
+mutation AddTagsToNodes($tags: TagListNodesAddInput!) {
+  addTagsToNodes(tags: $tags) {
+    id
+    name
+  }
+}
+
+mutation RemoveTagsFromNodes ($tags: TagListNodesRemoveInput!) {
+  removeTagsFromNodes (tags: $tags)
+}
+
+mutation UpdateNode($node: NodeUpdateInput!) {
+  updateNode(node: $node)
+}

@@ -1,0 +1,11 @@
+query NodesForMap {
+  findAllNodes {
+    id
+    nodeLabel
+    location {
+      latitude
+      longitude
+      location
+    }
+  }
+}

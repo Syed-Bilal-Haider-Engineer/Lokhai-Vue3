@@ -1,0 +1,48 @@
+query NetworkTraffic($name: String!, $timeRange: Int!, $timeRangeUnit: TimeRangeUnit!) {
+  metric(name: $name, timeRange: $timeRange, timeRangeUnit: $timeRangeUnit) {
+    status
+    ...MetricParts
+  }
+}
+
+query TopNNodes(
+  $timeRange: Int!, 
+  $timeRangeUnit: TimeRangeUnit!, 
+  $sortAscending: Boolean!, 
+  $pageSize: Int, 
+  $sortBy: String, 
+  $page: Int) {
+  topNNode(
+    timeRange: $timeRange, 
+    timeRangeUnit: $timeRangeUnit, 
+    sortAscending: $sortAscending, 
+    pageSize: $pageSize, 
+    sortBy: $sortBy, 
+    page: $page) {
+      nodeLabel
+      location
+      avgResponseTime
+      reachability
+  }
+  allNodeStatus {
+    id
+    status
+  }
+  nodeCount
+}
+
+query DownloadTopN(
+  $downloadFormat: DownloadFormat!
+  $timeRange: Int!, 
+  $timeRangeUnit: TimeRangeUnit!, 
+  $sortAscending: Boolean!, 
+  $sortBy: String) {
+  downloadTopN(
+    timeRange: $timeRange, 
+    timeRangeUnit: $timeRangeUnit, 
+    sortAscending: $sortAscending,
+    sortBy: $sortBy,
+    downloadFormat: $downloadFormat) {
+      topNBytes
+  }
+}

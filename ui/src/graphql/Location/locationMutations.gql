@@ -1,0 +1,31 @@
+#create
+mutation CreateLocation($location: MonitoringLocationCreateInput!) {
+  createLocation(location: $location){
+    id
+    location
+    address
+    longitude
+    latitude
+  }
+}
+
+#update
+mutation UpdateLocation($location: MonitoringLocationUpdateInput) {
+  updateLocation(location: $location) {
+    id
+    location
+    address
+    longitude
+    latitude
+  }
+}
+
+#delete
+mutation DeleteLocation($id: Long!) {
+  deleteLocation(id: $id)
+}
+
+#revoke
+mutation revokeMinionCertificate($locationId: Long!) {
+  revokeMinionCertificate(locationId: $locationId)
+}

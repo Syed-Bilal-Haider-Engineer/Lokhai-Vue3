@@ -1,0 +1,3 @@
+mutation DeleteMinion ($id: Long!) {
+  deleteMinion (id: $id)
+}

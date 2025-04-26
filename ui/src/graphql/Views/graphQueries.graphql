@@ -1,0 +1,50 @@
+query GetMetric($metric: String!) {
+  ...TimeSeriesMetric
+}
+
+query GetTimeSeriesMetric(
+  $name: String!
+  $monitor: String!
+  $nodeId: String
+  $timeRange: Int!
+  $timeRangeUnit: TimeRangeUnit!
+  $instance: String
+) {
+  metric: metric(
+    name: $name
+    labels: { monitor: $monitor, node_id: $nodeId, instance: $instance }
+    timeRange: $timeRange
+    timeRangeUnit: $timeRangeUnit
+  ) {
+    ...MetricParts
+  }
+}
+
+query GetTimeSeriesMetricsWithIfName(
+  $name: String!
+  $monitor: String!
+  $nodeId: String
+  $timeRange: Int!
+  $timeRangeUnit: TimeRangeUnit!
+  $ifName: String
+) {
+  metric: metric(
+    name: $name
+    labels: { monitor: $monitor, node_id: $nodeId, if_name: $ifName }
+    timeRange: $timeRange
+    timeRangeUnit: $timeRangeUnit
+  ) {
+    ...MetricParts
+  }
+}
+
+query GetNodeForGraphs($id: Long) {
+  findNodeById(id: $id) {
+    id
+    ipInterfaces {
+      ipAddress
+      snmpPrimary
+    }
+    scanType
+  }
+}

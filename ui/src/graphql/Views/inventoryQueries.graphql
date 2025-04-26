@@ -1,0 +1,139 @@
+query NodesList {
+  ...NodesParts
+}
+
+query NodeLatencyMetric(
+  $id: Long!
+  $monitor: String!
+  $instance: String!
+  $timeRange: Int!
+  $timeRangeUnit: TimeRangeUnit!
+) {
+  ...NodeLatencyParts
+  ...NodeStatusParts
+}
+
+query FindAllNodesByNodeLabelSearch($labelSearchTerm: String!) {
+  findAllNodesByNodeLabelSearch(labelSearchTerm: $labelSearchTerm) {
+    id
+    ipInterfaces {
+      id
+      ipAddress
+      nodeId
+      snmpPrimary
+    }
+    location {
+      id
+      location
+    }
+    tags {
+      id
+      name
+    }
+    monitoredState
+    monitoringLocationId
+    nodeLabel
+    scanType
+  }
+  allMetrics: metric(name: "response_time_msec") {
+    status
+    data {
+      resultType
+      result {
+        metric
+        value
+        values
+      }
+    }
+  }
+}
+
+query FindAllNodesByTags($tags: [String]) {
+  findAllNodesByTags(tags: $tags) {
+    id
+    ipInterfaces {
+      id
+      ipAddress
+      nodeId
+      snmpPrimary
+    }
+    location {
+      id
+      location
+    }
+    tags {
+      id
+      name
+    }
+    monitoredState
+    monitoringLocationId
+    nodeLabel
+    scanType
+  }
+  allMetrics: metric(name: "response_time_msec") {
+    status
+    data {
+      resultType
+      result {
+        metric
+        value
+        values
+      }
+    }
+  }
+}
+
+query FindAllNodesByMonitoredState($monitoredState: String!) {
+  findAllNodesByMonitoredState(monitoredState: $monitoredState) {
+    id
+    ipInterfaces {
+      id
+      ipAddress
+      nodeId
+      snmpPrimary
+    }
+    location {
+      id
+      location
+    }
+    monitoringLocationId
+    nodeLabel
+    scanType
+  }
+}
+
+query BuildNetworkInventoryPage {
+  findAllNodes {
+    id
+    ipInterfaces {
+      id
+      ipAddress
+      nodeId
+      snmpPrimary
+    }
+    location {
+      id
+      location
+    }
+    tags {
+      id
+      name
+    }
+    monitoredState
+    monitoringLocationId
+    nodeLabel
+    scanType
+    nodeAlias
+  }
+  allMetrics: metric(name: "response_time_msec") {
+    status
+    data {
+      resultType
+      result {
+        metric
+        value
+        values
+      }
+    }
+  }
+}

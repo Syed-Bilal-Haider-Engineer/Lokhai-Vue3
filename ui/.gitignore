@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+coverage
+yarn-error.log
+cypress/e2e/examples
+cypress/videos
+.vscode
+*.bk
+.env.development.local

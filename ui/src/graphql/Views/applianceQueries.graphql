@@ -1,0 +1,56 @@
+fragment NodesTableParts on Query {
+  findAllNodes {
+    id
+    nodeLabel
+    createTime
+    monitoringLocationId
+    ipInterfaces {
+      ipAddress
+      snmpPrimary
+    }
+    scanType
+  }
+}
+
+fragment MinionsTableParts on Query {
+  findAllMinions {
+    id
+    label
+    lastCheckedTime
+    location {
+      id
+      location
+    }
+    status
+    systemId
+  }
+}
+
+query ListNodesForTable {
+  ...NodesTableParts
+}
+
+query ListMinionsForTable {
+  ...MinionsTableParts
+}
+
+query ListMinionMetrics($instance: String!, $monitor: String!, $timeRange: Int!, $timeRangeUnit: TimeRangeUnit!) {
+  ...MinionLatencyParts
+}
+
+query ListNodeMetrics(
+  $id: Long!
+  $monitor: String!
+  $instance: String!
+  $timeRange: Int!
+  $timeRangeUnit: TimeRangeUnit!
+) {
+  ...NodeLatencyParts
+  ...NodeStatusParts
+}
+
+query ListMinionsAndDevicesForTables {
+  ...NodesTableParts
+  ...MinionsTableParts
+  ...LocationsParts
+}

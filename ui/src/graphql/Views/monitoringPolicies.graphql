@@ -1,0 +1,51 @@
+fragment MonitoringPolicyParts on MonitorPolicy {
+  id
+  memo
+  name
+  notifyByEmail
+  notifyByPagerDuty
+  notifyByWebhooks
+  rules {
+    id
+    name
+    componentType
+    detectionMethod
+    eventType
+    thresholdMetricName
+    alertConditions {
+      id
+      count
+      clearEvent {
+        id
+        name
+        eventType
+      }
+      overtime
+      overtimeUnit
+      severity
+      triggerEvent {
+        id
+        name
+        eventType
+      }
+    }
+  }
+  tags
+}
+
+query ListMonitoryPolicies {
+  listMonitoryPolicies {
+    ...MonitoringPolicyParts
+  }
+  defaultPolicy {
+    ...MonitoringPolicyParts
+  }
+}
+
+query CountAlertByPolicyId($id: Long!) {
+  countAlertByPolicyId(id: $id)
+}
+
+query CountAlertByRuleId($id: Long!) {
+  countAlertByRuleId(id: $id)
+}

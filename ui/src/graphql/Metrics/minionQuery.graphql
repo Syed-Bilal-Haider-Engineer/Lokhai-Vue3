@@ -1,0 +1,20 @@
+fragment MinionUptimeParts on Query {
+  minionUptime: metric(name: "minion_uptime_sec") {
+    ...MetricParts
+  }
+}
+
+fragment MinionLatencyParts on Query {
+  minionLatency: metric(
+    name: "response_time_msec", 
+    labels: {
+      instance: $instance
+      monitor: $monitor
+    }
+    timeRange: $timeRange
+    timeRangeUnit: $timeRangeUnit
+  ) {
+    status
+    ...MetricParts
+  }
+}

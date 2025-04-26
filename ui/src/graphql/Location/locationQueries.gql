@@ -1,0 +1,33 @@
+fragment LocationsParts on Query {
+  findAllLocations {
+    id
+    location
+    address
+    longitude
+    latitude
+    # may required
+    # status
+    # expired
+  }
+}
+
+query LocationsList {
+  ...LocationsParts
+}
+
+query SearchLocation($searchTerm: String) {
+  searchLocation(searchTerm: $searchTerm) {
+    id
+    location
+    address
+    longitude
+    latitude
+  }
+}
+
+query getMinionCertificate($location: Long) {
+  getMinionCertificate(locationId: $location){
+    password
+    certificate
+  }
+}

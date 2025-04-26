@@ -1,0 +1,31 @@
+fragment TagsParts on Query {
+  tags {
+    id
+    name
+  }
+}
+
+query ListTags {
+  ...TagsParts
+}
+
+fragment TagsSearchParts on Query {
+  tags(searchTerm: $searchTerm) {
+    id
+    name
+  }
+}
+
+query ListTagsSearch($searchTerm: String) {
+  ...TagsSearchParts
+}
+
+query ListTagsByNodeIds($nodeIds: [Long]) {
+  tagsByNodeIds(nodeIds: $nodeIds) {
+    nodeId
+    tags {
+      id
+      name
+    }
+  }
+}

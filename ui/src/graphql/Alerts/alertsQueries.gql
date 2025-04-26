@@ -1,0 +1,58 @@
+fragment AlertsParts on Query {
+  findAllAlerts(
+    page: $page
+    pageSize: $pageSize
+    severities: $severities
+    sortAscending: $sortAscending
+    sortBy: $sortBy
+    timeRange: $timeRange
+    nodeLabel: $nodeLabel
+  ) {
+    lastPage
+    nextPage
+    totalAlerts
+    alerts {
+      acknowledged
+      description
+      firstEventTimeMs
+      lastUpdateTimeMs
+      severity
+      label
+      nodeName
+      databaseId
+      location
+      ruleNameList
+      policyNameList
+    }
+  }
+}
+
+query AlertsList(
+  $page: Int!
+  $pageSize: Int
+  $severities: [String]
+  $sortAscending: Boolean!
+  $sortBy: String
+  $timeRange: TimeRange!
+  $nodeLabel: String
+) {
+  ...AlertsParts
+}
+
+query CountAlerts(
+  $severityFilters: [String] # ["CRITICAL", "MAJOR"]
+  $timeRange: TimeRange!
+) {
+  countAlerts(severityFilters: $severityFilters, timeRange: $timeRange) {
+    count
+    error
+  }
+}
+
+query AlertCounts {
+  alertCounts {
+    acknowledgedCount
+    totalAlertCount
+    countBySeverity
+  }
+}

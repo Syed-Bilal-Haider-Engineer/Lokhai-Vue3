@@ -1,0 +1,3 @@
+mutation SavePagerDutyConfig ($config: PagerDutyConfigInput!) {
+  savePagerDutyConfig (config: $config)
+}
